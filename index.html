@@ -2,12 +2,23 @@
     <head>
         <script src="jquery-1.10.2.min.js"></script>
         <script src="underscore-min.js"></script>
+        <script id="result-item" type="text/template">
+           <input type="checkbox"/><%= result %> <%= result.length %>
+        </script>
         <script id="search-results" type="text/template">
+            <% _(results).each(function(result, i) { %>
+                <li data-id="item<%= i %>">
+                  <%= i+1 %>. <%= _.partial("result-item", {result:result}) %>
+                </li>
+            <% }); %>
         </script>
     </head>
     <body>
-        <table>
-        </table>
+        <input id="query" type="text"></input>
+        <button id="search">Search</button>
+        <ul id="results">
+        </ul>
+        <p id="message"></p>
         <script src="main.js"></script>
     </body>
 </html>
